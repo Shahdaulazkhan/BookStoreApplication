@@ -17,5 +17,9 @@ namespace BookStoreApp.Controllers
         {
             return View();
         }
+        public IActionResult test()
+        {
+            return View();
+        }
     }
 }
