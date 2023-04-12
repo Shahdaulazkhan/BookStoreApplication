@@ -8,18 +8,9 @@ namespace BookStoreApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public int Index()
         {
-            return View();
-        }
-
-        public IActionResult Testing()
-        {
-            return View();
-        }
-        public IActionResult test()
-        {
-            return View();
+            return 2345;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace BookStoreApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,31 +32,16 @@ namespace BookStoreApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    if (env.IsDevelopment())
-                    {
-                        await context.Response.WriteAsync("Development Mode");
-                    }
-                    else if (env.IsProduction())
-                    {
-                        await context.Response.WriteAsync("Production Mode");
-                    }
-                    else if (env.IsStaging())
-                    {
-                        await context.Response.WriteAsync("Staging Mode");
-                    }
-                    else
-                    {
-                        if (env.IsEnvironment("Develop"))
-                        {
-                            await context.Response.WriteAsync("Hello Form custom Environment");
-                        }
-                        //await context.Response.WriteAsync(env.EnvironmentName);
-                    }
-                    await context.Response.WriteAsync("Hello World");
-                });
+                endpoints.MapDefaultControllerRoute();
             });
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapGet("/", async context =>
+            //     {
+            //         await context.Response.WriteAsync("This is middleware");
+            //     });
+            //});
 
 
         }
