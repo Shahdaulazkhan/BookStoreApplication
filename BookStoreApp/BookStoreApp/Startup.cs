@@ -21,20 +21,43 @@ namespace BookStoreApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
             app.UseRouting();
+
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello Boss");
+                    if (env.IsDevelopment())
+                    {
+                        await context.Response.WriteAsync("Development Mode");
+                    }
+                    else if (env.IsProduction())
+                    {
+                        await context.Response.WriteAsync("Production Mode");
+                    }
+                    else if (env.IsStaging())
+                    {
+                        await context.Response.WriteAsync("Staging Mode");
+                    }
+                    else
+                    {
+                        if (env.IsEnvironment("Develop"))
+                        {
+                            await context.Response.WriteAsync("Hello Form custom Environment");
+                        }
+                        //await context.Response.WriteAsync(env.EnvironmentName);
+                    }
+                    await context.Response.WriteAsync("Hello World");
                 });
             });
+
+
         }
     }
 }
